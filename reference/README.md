@@ -11,3 +11,11 @@ Source: https://github.com/netresearch/claude-code-marketplace
 ## travisvn/awesome-claude-skills
 Meta-list of curated Claude Skills sources and tools (not a skill itself — a map of where to look).
 Source: https://github.com/travisvn/awesome-claude-skills
+
+## eferrares/awesome-startup-resources
+Broad catalog of small-business tools: accounting (QuickBooks/Xero/Wave), financial modeling (Runway, Causal, Fathom), email marketing, business banking, AI voice receptionists, ad agency directory. Wider than pure automation — general SMB stack reference.
+Source: https://github.com/eferrares/awesome-startup-resources
+
+## ungerts/awesome-bpm
+Curated list of Business Process Management tools/engines/frameworks (incl. n8n, Camunda, Power Automate). Includes a link to "Tool Markt Monitor" — a German-language annual BPM tooling market survey.
+Source: https://github.com/ungerts/awesome-bpm
