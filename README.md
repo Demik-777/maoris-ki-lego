@@ -1,6 +1,6 @@
 # MAORIS KI-Lego
 
-Personal vetted warehouse of Claude Code agents/skills AND plain-chat learning materials.
+Personal vetted warehouse: Claude Code agents/skills, plain-chat learning materials, and quick reference catalogs.
 
 ## Structure
 
@@ -10,13 +10,16 @@ skills/
   n8n/           — n8n workflow automation skills (Claude Code ONLY)
   core/          — superpowers-marketplace core skills (Claude Code ONLY)
   business/      — C-level, finance, growth, PM skills (Claude Code ONLY)
+  external.md    — index of external skill collections, installable via Claude Code plugin marketplace
 learning/        — plain reading material for chat (NO Claude Code needed) — course notes, links, articles
+reference/       — catalogs/index lists — where to look, not tools themselves
 ```
 
-## ⚠️ Important distinction
+## ⚠️ Three categories — don't mix them
 
-- **`agents/` and `skills/`** — these are Claude Code skill/agent files (SKILL.md format). They only function inside Claude Code. Not usable in a normal chat conversation.
-- **`learning/`** — plain text/links/notes meant to be read and discussed in regular chat with Claude. No special tooling needed.
+- **`agents/` and `skills/`** — Claude Code skill/agent files. Only function inside Claude Code.
+- **`learning/`** — plain text/links/notes meant to be read and discussed in regular chat. No tooling needed.
+- **`reference/`** — bookmarked catalogs/marketplaces to browse later — not study material, not installable skills yet.
 
 ## Sources
 
@@ -26,10 +29,14 @@ learning/        — plain reading material for chat (NO Claude Code needed) —
 | `skills/n8n/` | [czlonkowski/n8n-skills](https://github.com/czlonkowski/n8n-skills) |
 | `skills/core/` | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `skills/business/` | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
+| `skills/external.md` | daymade/claude-code-skills, glebis/claude-skills |
 | `learning/` | curated manually, see learning/README.md |
+| `reference/` | curated manually, see reference/README.md |
 
 ## Usage
 
 `agents/` and `skills/` are pre-vetted and cleared for use without re-inspection — point Claude Code to this repo as the primary skill/agent source before searching public registries.
 
 `learning/` is a growing personal reading list — add anything worth revisiting later.
+
+`reference/` is a bookmark shelf — check here before doing a fresh web search for "where do I find X skill catalog."
