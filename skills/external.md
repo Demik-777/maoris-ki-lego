@@ -16,3 +16,13 @@ Actively maintained collection, frequent additions.
 - Categories: meetings & transcripts, research & knowledge, writing/design/publishing, images/audio/media, personal analytics, Claude Code ops
 - Recent (2026-07): font-features, typography (RU/EN/DE/FR smart quotes/dashes)
 - Source: https://github.com/glebis/claude-skills
+
+## evolsb/claude-legal-skill
+Contract review skill with CUAD risk detection, market benchmarks, lawyer-ready redlines (tracked-changes .docx, redline PDFs, negotiation memos).
+- Install: `git clone https://github.com/evolsb/claude-legal-skill ~/.claude/skills/contract-review`
+- Benchmark: F1 ~0.62 on clause extraction (ContractEval) — first-pass review, not a replacement for attorney review on material deals
+- Default focus: US law — provisions vary by jurisdiction, verify for DE/EU contracts
+- Source: https://github.com/evolsb/claude-legal-skill
+
+## ⚠️ Needs refresh
+`skills/business/` in this repo was copied from alirezarezvani/claude-skills at ~253 files / early version. Source has since grown to 345 skills / 5200+ stars (added: founder-mode C-level personas, AEO marketing skills, enterprise research ops). Re-sync not done yet — flag for a dedicated pass, not a quick copy job.
