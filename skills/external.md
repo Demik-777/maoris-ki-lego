@@ -24,5 +24,5 @@ Contract review skill with CUAD risk detection, market benchmarks, lawyer-ready 
 - Default focus: US law — provisions vary by jurisdiction, verify for DE/EU contracts
 - Source: https://github.com/evolsb/claude-legal-skill
 
-## ⚠️ Needs refresh
-`skills/business/` in this repo was copied from alirezarezvani/claude-skills at ~253 files / early version. Source has since grown to 345 skills / 5200+ stars (added: founder-mode C-level personas, AEO marketing skills, enterprise research ops). Re-sync not done yet — flag for a dedicated pass, not a quick copy job.
+## ✅ skills/business/ refreshed (08.08.2026)
+Re-synced from alirezarezvani/claude-skills: business-growth (44), c-level (287, incl. founder-mode personas + general-counsel-advisor), finance (27), pm/project-management (74) — 432 files total, up from the original ~386. Source repo continues to grow beyond these 4 categories (engineering, marketing, product, compliance, research-ops) — those are out of scope for `skills/business/`, not pulled in.
