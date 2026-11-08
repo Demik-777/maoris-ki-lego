@@ -19,3 +19,8 @@ Source: https://github.com/eferrares/awesome-startup-resources
 ## ungerts/awesome-bpm
 Curated list of Business Process Management tools/engines/frameworks (incl. n8n, Camunda, Power Automate). Includes a link to "Tool Markt Monitor" — a German-language annual BPM tooling market survey.
 Source: https://github.com/ungerts/awesome-bpm
+
+## Наши инструменты разработки и анализа
+
+- [project-tools.md](project-tools.md) — LLM Council Карпати (консилиум) и AutoGen: выбор под задачу, проверенные версии и зависимости.
+- [chat-bootstrap.md](chat-bootstrap.md) — постоянная инструкция для новых чатов и способ проверки автоматического подбора.

@@ -26,3 +26,14 @@ Contract review skill with CUAD risk detection, market benchmarks, lawyer-ready 
 
 ## ✅ skills/business/ refreshed (08.08.2026)
 Re-synced from alirezarezvani/claude-skills: business-growth (44), c-level (287, incl. founder-mode personas + general-counsel-advisor), finance (27), pm/project-management (74) — 432 files total, up from the original ~386. Source repo continues to grow beyond these 4 categories (engineering, marketing, product, compliance, research-ops) — those are out of scope for `skills/business/`, not pulled in.
+
+## External project frameworks and applications
+
+These are separate forked projects, not directly installable Claude Code skills. Evaluate them alongside local materials when choosing an approach for project development.
+
+| Project | Our fork | Routing and requirements |
+|---|---|---|
+| LLM Council by Andrej Karpathy (консилиум) | https://github.com/Demik-777/llm-council | [Project tools](../reference/project-tools.md#llm-council--консилиум-карпати) |
+| AutoGen | https://github.com/Demik-777/autogen | [Project tools](../reference/project-tools.md#autogen--архитектура-нескольких-агентов) |
+
+See [chat bootstrap](../reference/chat-bootstrap.md) for persistent assistant instructions. Source availability does not imply a running service or connected API.

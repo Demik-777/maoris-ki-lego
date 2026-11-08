@@ -14,10 +14,12 @@ Open resource for work with any LLM or AI assistant that can access this reposit
 | `skills/external.md` | Каталог внешних коллекций, ещё не включённых в хранилище |
 | `learning/` | Учебные материалы, заметки и ссылки |
 | `reference/` | Справочники и каталоги источников |
+| `reference/project-tools.md` | LLM Council Карпати и AutoGen: назначение, условия применения, ограничения |
+| `reference/chat-bootstrap.md` | Готовая постоянная инструкция для автоматического подбора в новых чатах |
 
 ## Как использовать
 
-1. Найти подходящий материал в этом хранилище.
+1. Прочитать [AGENTS.md](AGENTS.md), оценить внешние проекты по [каталогу](reference/project-tools.md) и найти подходящие локальные материалы.
 2. Прочитать нужный `SKILL.md` или описание агента и необходимые связанные файлы.
 3. Применить методику к текущей задаче с учётом инструкций пользователя.
 4. Адаптировать команды, названия инструментов и пути к рабочей среде модели.
@@ -44,3 +46,7 @@ Open resource for work with any LLM or AI assistant that can access this reposit
 | Справочники | [reference/README.md](reference/README.md) |
 
 Сохраняйте сведения об авторах и лицензиях исходных материалов.
+
+## Автоматический подбор в новых чатах
+
+Добавьте [готовую инструкцию](reference/chat-bootstrap.md) в постоянные пользовательские или проектные настройки своего ассистента. Внешние проекты остаются отдельными форками: [LLM Council](https://github.com/Demik-777/llm-council) и [AutoGen](https://github.com/Demik-777/autogen). Их назначение и готовность к запуску описаны в [каталоге разработки](reference/project-tools.md).
