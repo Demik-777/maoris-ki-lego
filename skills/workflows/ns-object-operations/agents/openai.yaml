@@ -1,0 +1,6 @@
+interface:
+  display_name: "NS — управление объектом"
+  short_description: "Порядок работ, доступ и замены на объектах NS"
+  default_prompt: "Примени $ns-object-operations: подготовь понятную инструкцию по объекту NS или план действий при отсутствии сотрудника и проблеме доступа."
+policy:
+  allow_implicit_invocation: true

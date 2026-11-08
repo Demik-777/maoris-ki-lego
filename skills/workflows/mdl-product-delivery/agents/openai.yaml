@@ -1,0 +1,6 @@
+interface:
+  display_name: "MDL — от идеи до выпуска"
+  short_description: "Сфокусированный продукт и проверяемый выпуск MVP"
+  default_prompt: "Примени $mdl-product-delivery: преврати идею MDL в посильную первую версию и доведи поручение до проверяемого результата."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Память проекта"
+  short_description: "Идеи и решения без потерь между рабочими чатами"
+  default_prompt: "Примени $maoris-project-capture: собери идеи, решения и открытые вопросы этого проекта и сохрани краткую актуальную запись."
+policy:
+  allow_implicit_invocation: true
