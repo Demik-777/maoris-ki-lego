@@ -8,6 +8,8 @@ Open resource for work with any LLM or AI assistant that can access this reposit
 
 | Путь | Содержимое |
 |---|---|
+| `skills/meta/maoris-ki-lego/` | Основная версия универсального скилла подбора и выполнения задач |
+| `reference/ki-lego-release.json` | Версия выпуска и контрольные суммы инструкций |
 | `agents/` | Описания специализированных агентов: разработка, проверка кода, безопасность, SEO |
 | `skills/n8n/` | Автоматизации и обслуживание n8n |
 | `skills/business/` | Управление, финансы, развитие бизнеса и проекты |
