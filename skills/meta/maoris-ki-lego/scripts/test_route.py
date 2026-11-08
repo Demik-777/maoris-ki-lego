@@ -26,4 +26,32 @@ class RoutingTest(unittest.TestCase):
   (self.r/'references/source.json').unlink();p=self.run_cli('learn',input='{}');self.assertNotEqual(p.returncode,0);self.assertIn('private',p.stderr)
  def test_bad_memory_skipped(self):
   (self.r/'memory/experience.jsonl').write_text('bad json\n');self.assertEqual(self.search('excel')['lessons'],[])
+ def note(self,event_id,**extra):
+  n={'event_id':event_id,'scope':'NS','tags':['excel'],'observation':'Observed problem','recommendation':'Check dates','status':'candidate','evidence_kind':'observation'};n.update(extra)
+  return self.run_cli('learn',input=json.dumps(n))
+ def test_timesheet_phrase(self):self.assertEqual(self.search('учёт отработанных часов')['candidates'][0]['name'],'Spreadsheets')
+ def test_inflected_table(self):self.assertEqual(self.search('сделай таблицу')['candidates'][0]['name'],'Spreadsheets')
+ def test_german_times(self):self.assertEqual(self.search('Arbeitszeiten erfassen')['candidates'][0]['name'],'Spreadsheets')
+ def test_electronic_is_not_invoice(self):self.assertNotIn('maoris-e-rechnung',[x['name'] for x in self.search('электронный каталог')['candidates']])
+ def test_meter_is_not_invoice(self):self.assertNotIn('maoris-e-rechnung',[x['name'] for x in self.search('счетчик электроэнергии')['candidates']])
+ def test_expired_lesson_hidden(self):
+  self.assertEqual(self.note('old',expires_on='2000-01-01').returncode,0)
+  self.assertEqual(self.search('excel','NS')['lessons'],[])
+ def test_retired_lesson_hidden(self):
+  self.assertEqual(self.note('old').returncode,0)
+  p=self.run_cli('retire','--event-id','old','--reason','No longer applies');self.assertEqual(p.returncode,0,p.stderr)
+  self.assertEqual(self.search('excel','NS')['lessons'],[])
+  self.assertEqual(len((self.r/'memory/experience.jsonl').read_text().splitlines()),2)
+ def test_superseded_lesson_hidden(self):
+  self.assertEqual(self.note('old').returncode,0)
+  self.assertEqual(self.note('new',supersedes='old',status='confirmed',evidence_kind='user_instruction').returncode,0)
+  self.assertEqual([x['event_id'] for x in self.search('excel','NS')['lessons']],['new'])
+ def test_cross_scope_replacement_rejected(self):
+  self.assertEqual(self.note('old').returncode,0)
+  self.assertNotEqual(self.note('new',scope='MDL',supersedes='old').returncode,0)
+ def test_malformed_valid_json_note_skipped(self):
+  (self.r/'memory/experience.jsonl').write_text(json.dumps({'event_id':'bad','scope':'NS','status':'candidate','tags':[123]})+'\n')
+  self.assertEqual(self.search('excel','NS')['lessons'],[])
+ def test_observation_cannot_confirm_itself(self):self.assertNotEqual(self.note('bad',status='confirmed').returncode,0)
+ def test_invalid_expiry_rejected(self):self.assertNotEqual(self.note('bad',expires_on='someday').returncode,0)
 if __name__=='__main__':unittest.main()

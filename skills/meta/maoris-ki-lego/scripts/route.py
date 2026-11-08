@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Local metadata retrieval and private experience logging. No network or model calls."""
 import argparse
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -16,7 +17,7 @@ GROUPS = [
  ("presentation", "presentations", "pptx", "slides", "презентация", "слайды"),
  ("copywriting", "реклама", "рекламный", "advertising", "werbung", "маркетинг"),
  ("n8n", "workflow", "automation", "автоматизация", "автоматизировать"),
- ("invoice", "rechnung", "счет", "счёт", "электронный"),
+ ("invoice", "rechnung", "счет", "счёт", "xrechnung", "zugferd"),
  ("image", "imagegen", "изображение", "картинка", "иллюстрация"),
  ("seo", "сео", "поисковый"),
 ]
@@ -39,8 +40,20 @@ def tokens(value):
 
 def expanded(value):
     result = tokens(value)
+    folded = value.lower().replace("ё", "е")
+    stems = {"таблиц":"excel", "табел":"zeiterfassung", "презентац":"presentation", "реклам":"copywriting", "автоматизац":"automation", "изображен":"image", "иллюстрац":"image"}
+    for word in tuple(result):
+        for stem, target in stems.items():
+            if word.startswith(stem):
+                result.add(target)
+    phrases = [(r"(?:учет|отработан\w*|рабоч\w*)\s+(?:рабоч\w*\s+)?(?:час\w*|времен\w*)|arbeitszeit\w*|stunden(?:zettel|nachweis|erfassung)", "zeiterfassung"), (r"(?:коммерческ\w*|рекламн\w*)\s+предложен\w*|sales copy", "copywriting")]
+    if result & {"счета", "счетов", "счету", "счетом", "счете"}:
+        result.add("invoice")
+    for pattern, target in phrases:
+        if re.search(pattern, folded):
+            result.add(target)
     for group in GROUPS:
-        terms = set(group)
+        terms = tokens(" ".join(group))
         if result & terms:
             result |= terms
     return result
@@ -49,7 +62,7 @@ def score(query, name="", description="", tags=""):
     title, desc, tag = tokens(name), tokens(description), tokens(tags)
     return 6*len(query & title) + len(query & desc) + 3*len(query & tag)
 
-def load_memory(root):
+def read_events(root):
     path = root / "memory/experience.jsonl"
     records = {}
     if path.exists():
@@ -61,6 +74,70 @@ def load_memory(root):
             except ValueError:
                 continue
     return records
+
+def valid_note(item):
+    return (item.get("event_type", "note") == "note"
+            and item.get("scope") in ("NS", "MDL", "general")
+            and item.get("status") in ("candidate", "confirmed")
+            and isinstance(item.get("tags"), list)
+            and bool(item["tags"])
+            and all(isinstance(tag, str) for tag in item["tags"])
+            and all(isinstance(item.get(key), str) for key in ("observation", "recommendation")))
+
+def load_memory(root):
+    events = read_events(root)
+    notes = {key:item for key,item in events.items() if valid_note(item)}
+    hidden = set()
+    for item in events.values():
+        target = item.get("target_id") if item.get("event_type") == "retirement" and isinstance(item.get("reason"), str) else item.get("supersedes") if valid_note(item) else None
+        if isinstance(target, str) and target in notes and item.get("scope") == notes[target]["scope"]:
+            hidden.add(target)
+    active = {}
+    for key,item in notes.items():
+        if key in hidden:
+            continue
+        expiry = item.get("expires_on")
+        if expiry:
+            try:
+                if date.fromisoformat(expiry) < datetime.now(timezone.utc).date():
+                    continue
+            except (ValueError, TypeError):
+                continue
+        active[key] = item
+    return active
+
+def require_private(root):
+    try:
+        private = json.loads((root / "references/source.json").read_text()).get("private_experience") is True
+    except (OSError, ValueError):
+        private = False
+    if not private:
+        raise ValueError("private experience marker missing; refuse to log in a public source checkout")
+
+def append_event(root, note):
+    note["date"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    path = root / "memory/experience.jsonl"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(path, os.O_WRONLY|os.O_CREAT|os.O_APPEND, 0o600)
+    try:
+        payload = (json.dumps(note, ensure_ascii=False)+"\n").encode()
+        if os.write(fd, payload) != len(payload):
+            raise OSError("incomplete event write")
+    finally:
+        os.close(fd)
+    return {"status":"recorded_locally", "event_id":note["event_id"], "durable_save_required":True}
+
+def retire(root, event_id, reason):
+    require_private(root)
+    events = read_events(root)
+    if event_id not in events or not valid_note(events[event_id]):
+        raise ValueError("unknown lesson event_id")
+    if not 1 <= len(reason) <= 400:
+        raise ValueError("invalid retirement reason")
+    key = "retire:"+hashlib.sha256((event_id+"\n"+reason).encode()).hexdigest()[:24]
+    if key in events:
+        return {"status":"already_recorded", "event_id":key, "durable_save_required":True}
+    return append_event(root, {"event_id":key,"event_type":"retirement","target_id":event_id,"scope":events[event_id]["scope"],"reason":reason})
 
 def personal_candidates(root):
     for path in sorted(root.parent.glob("skill-*/SKILL.md")):
@@ -132,12 +209,7 @@ def search(root, query, scope):
             "notice":"Metadata and advisory lessons only; read chosen instructions and verify current access."}
 
 def learn(root, item):
-    try:
-        private = json.loads((root / "references/source.json").read_text()).get("private_experience") is True
-    except (OSError, ValueError):
-        private = False
-    if not private:
-        raise ValueError("private experience marker missing; refuse to log in a public source checkout")
+    require_private(root)
     if not isinstance(item, dict):
         raise ValueError("note must be an object")
     event_id = item.get("event_id", "")
@@ -157,20 +229,24 @@ def learn(root, item):
     for key in ("observation","recommendation"):
         if not isinstance(item.get(key),str) or not 1 <= len(item[key]) <= 400:
             raise ValueError("invalid "+key)
-    if event_id in load_memory(root):
+    events = read_events(root)
+    if event_id in events:
         return {"status":"already_recorded","event_id":event_id,"durable_save_required":True}
     note = {k:item[k] for k in ("event_id","scope","tags","observation","recommendation","status","evidence_kind")}
-    note["date"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    path = root / "memory/experience.jsonl"
-    path.parent.mkdir(parents=True,exist_ok=True)
-    fd = os.open(path,os.O_WRONLY|os.O_CREAT|os.O_APPEND,0o600)
-    try:
-        payload = (json.dumps(note,ensure_ascii=False)+"\n").encode()
-        if os.write(fd,payload) != len(payload):
-            raise OSError("incomplete note write")
-    finally:
-        os.close(fd)
-    return {"status":"recorded_locally","event_id":event_id,"durable_save_required":True}
+    if "supersedes" in item:
+        target = item["supersedes"]
+        if not isinstance(target,str) or target not in events or not valid_note(events[target]) or events[target]["scope"] != item["scope"]:
+            raise ValueError("supersedes must reference an existing lesson in the same scope")
+        note["supersedes"] = target
+    expiry = item.get("expires_on")
+    if expiry is not None:
+        try:
+            note["expires_on"] = date.fromisoformat(expiry).isoformat()
+        except (ValueError, TypeError):
+            raise ValueError("expires_on must be YYYY-MM-DD")
+    elif item["status"] == "candidate":
+        note["expires_on"] = (datetime.now(timezone.utc).date()+timedelta(days=30)).isoformat()
+    return append_event(root, note)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -180,9 +256,17 @@ def main():
     find.add_argument("--query",required=True)
     find.add_argument("--scope",choices=("NS","MDL","general"),default="general")
     sub.add_parser("learn")
+    remove = sub.add_parser("retire")
+    remove.add_argument("--event-id", required=True)
+    remove.add_argument("--reason", required=True)
     args = parser.parse_args()
     try:
-        result = search(args.root,args.query,args.scope) if args.command=="search" else learn(args.root,json.load(sys.stdin))
+        if args.command == "search":
+            result = search(args.root,args.query,args.scope)
+        elif args.command == "retire":
+            result = retire(args.root,args.event_id,args.reason)
+        else:
+            result = learn(args.root,json.load(sys.stdin))
     except (OSError,ValueError,TypeError) as exc:
         print("FAIL: "+str(exc),file=sys.stderr)
         return 1
