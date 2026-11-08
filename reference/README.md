@@ -24,3 +24,9 @@ Source: https://github.com/ungerts/awesome-bpm
 
 - [project-tools.md](project-tools.md) — LLM Council Карпати (консилиум) и AutoGen: выбор под задачу, проверенные версии и зависимости.
 - [chat-bootstrap.md](chat-bootstrap.md) — постоянная инструкция для новых чатов и способ проверки автоматического подбора.
+
+## Популярные open-source компоненты для MDL
+
+- [open-source-tools.md](open-source-tools.md) — 11 GitHub проектов с минимум 20 000 звёзд, лицензиями, направлениями применения и статусом на 2026-11-08.
+- [tool-evaluations/2026-11-08-first-wave.md](tool-evaluations/2026-11-08-first-wave.md) — оценка первой волны из четырёх инструментов и критерии технического теста.
+- [../integrations/README.md](../integrations/README.md) — инструкции для изолированной проверки, без внесения изменений в сервер.

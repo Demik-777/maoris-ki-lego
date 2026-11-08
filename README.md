@@ -15,6 +15,8 @@ Open resource for work with any LLM or AI assistant that can access this reposit
 | `learning/` | Учебные материалы, заметки и ссылки |
 | `reference/` | Справочники и каталоги источников |
 | `reference/project-tools.md` | AGENTS.md, LLM Council Карпати и AutoGen: назначение, условия применения, ограничения |
+| `reference/open-source-tools.md` | 11 проверенных популярных open-source кандидатов, отбор по задачам и статус внедрения |
+| `integrations/` | Изолированные тест-протоколы четырёх приоритетных инструментов, ещё не запущенных |
 | `reference/chat-bootstrap.md` | Готовая постоянная инструкция для автоматического подбора в новых чатах |
 
 ## Как использовать
@@ -46,6 +48,10 @@ Open resource for work with any LLM or AI assistant that can access this reposit
 | Справочники | [reference/README.md](reference/README.md) |
 
 Сохраняйте сведения об авторах и лицензиях исходных материалов.
+
+## Каталог внешних инструментов
+
+Для новых функций MDL сначала сверяйтесь с [каталогом open-source инструментов](reference/open-source-tools.md), а при планировании тестов — с [интеграционными карточками](integrations/README.md). Это подбор и тест-протоколы, **не** установленные программы.
 
 ## Автоматический подбор в новых чатах
 
