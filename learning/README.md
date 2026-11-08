@@ -1,6 +1,6 @@
 # Learning materials
 
-Plain reading material for regular chat with Claude — no Claude Code needed.
+Plain reading material for regular chat with any LLM or AI assistant that can access this repository. No specific coding environment is required.
 Add anything worth revisiting: course notes, article links, reference lists.
 
 ## Contents

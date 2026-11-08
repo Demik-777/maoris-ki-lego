@@ -1,42 +1,46 @@
-# MAORIS KI-Lego
+# Maoris KI-Lego
 
-Personal vetted warehouse: Claude Code agents/skills, plain-chat learning materials, and quick reference catalogs.
+Открытое рабочее хранилище скиллов, описаний агентов, скриптов, учебных материалов и справочников для любой LLM-модели или AI-ассистента с доступом к этому репозиторию: ChatGPT, Codex, Claude, Gemini и других.
 
-## Structure
+Open resource for work with any LLM or AI assistant that can access this repository.
 
-```
-agents/          — ECC agent definitions (Claude Code ONLY — need Claude Code to run)
-skills/
-  n8n/           — n8n workflow automation skills (Claude Code ONLY)
-  core/          — superpowers-marketplace core skills (Claude Code ONLY)
-  business/      — C-level, finance, growth, PM skills (Claude Code ONLY)
-  external.md    — index of external skill collections, installable via Claude Code plugin marketplace
-learning/        — plain reading material for chat (NO Claude Code needed) — course notes, links, articles
-reference/       — catalogs/index lists — where to look, not tools themselves
-```
+## Структура
 
-## ⚠️ Three categories — don't mix them
+| Путь | Содержимое |
+|---|---|
+| `agents/` | Описания специализированных агентов: разработка, проверка кода, безопасность, SEO |
+| `skills/n8n/` | Автоматизации и обслуживание n8n |
+| `skills/business/` | Управление, финансы, развитие бизнеса и проекты |
+| `skills/external.md` | Каталог внешних коллекций, ещё не включённых в хранилище |
+| `learning/` | Учебные материалы, заметки и ссылки |
+| `reference/` | Справочники и каталоги источников |
 
-- **`agents/` and `skills/`** — Claude Code skill/agent files. Only function inside Claude Code.
-- **`learning/`** — plain text/links/notes meant to be read and discussed in regular chat. No tooling needed.
-- **`reference/`** — bookmarked catalogs/marketplaces to browse later — not study material, not installable skills yet.
+## Как использовать
 
-## Sources
+1. Найти подходящий материал в этом хранилище.
+2. Прочитать нужный `SKILL.md` или описание агента и необходимые связанные файлы.
+3. Применить методику к текущей задаче с учётом инструкций пользователя.
+4. Адаптировать команды, названия инструментов и пути к рабочей среде модели.
 
-| Folder | Source repo |
+Любая модель с доступом к файлам может читать и применять текстовые методики. Запуск скриптов и автоматическая установка зависят от возможностей среды. Публикация репозитория не устанавливает скиллы и не подключает внешние сервисы.
+
+Некоторые материалы сохранены в исходном формате Claude Code. Поля `model`, `tools`, slash-команды и каталоги `.claude-plugin/` относятся к интеграции с этой средой и не ограничивают чтение и адаптацию материалов другими LLM.
+
+## Основные копии скиллов
+
+Основные копии C-level скиллов находятся в `skills/business/c-level/skills/`. В шести наборах — `arquiteto-de-empresa`, `chief-ai-officer-advisor`, `chief-customer-officer-advisor`, `chief-data-officer-advisor`, `general-counsel-advisor`, `vpe-advisor` — повторяющиеся вложенные каталоги заменены относительными символическими ссылками. У каждого набора одна копия инструкций, скриптов и справочников.
+
+При чтении через GitHub используйте основные каталоги. Для прежних путей в локальном клоне нужна поддержка символических ссылок. При копировании отдельного пакета включайте содержимое основного каталога.
+
+## Источники
+
+| Раздел | Источник |
 |---|---|
 | `agents/` | [affaan-m/ECC](https://github.com/affaan-m/ECC) |
 | `skills/n8n/` | [czlonkowski/n8n-skills](https://github.com/czlonkowski/n8n-skills) |
-| `skills/core/` | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace) |
 | `skills/business/` | [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) |
-| `skills/external.md` | daymade/claude-code-skills, glebis/claude-skills |
-| `learning/` | curated manually, see learning/README.md |
-| `reference/` | curated manually, see reference/README.md |
+| Внешние коллекции | [skills/external.md](skills/external.md) |
+| Учебные материалы | [learning/README.md](learning/README.md) |
+| Справочники | [reference/README.md](reference/README.md) |
 
-## Usage
-
-`agents/` and `skills/` are pre-vetted and cleared for use without re-inspection — point Claude Code to this repo as the primary skill/agent source before searching public registries.
-
-`learning/` is a growing personal reading list — add anything worth revisiting later.
-
-`reference/` is a bookmark shelf — check here before doing a fresh web search for "where do I find X skill catalog."
+Сохраняйте сведения об авторах и лицензиях исходных материалов.
