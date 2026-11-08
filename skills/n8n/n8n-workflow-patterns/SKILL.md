@@ -325,9 +325,9 @@ See: n8n Expression Syntax skill
 ### 2. Multiple Input Items
 **Problem**: Node processes all input items, but I only want one
 
-**Solution**: Use "Execute Once" mode or process first item only
+**Solution**: To read a field from the first input item, use `$input.first().json.field`. This selects data; it does not stop the node from processing other items. Use the node's "Execute Once" setting only when the operation should actually run once.
 ```javascript
-{{$json[0].field}}  // First item only
+{{ $input.first().json.field }}  // Field from the first input item
 ```
 
 ### 3. Authentication Issues
