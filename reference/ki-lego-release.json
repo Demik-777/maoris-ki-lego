@@ -1,10 +1,10 @@
 {
-  "release": "2.2.0",
-  "released_on": "2026-11-08",
+  "release": "2.2.1",
+  "released_on": "2026-11-11",
   "source_repository": "Demik-777/maoris-ki-lego",
   "source_directory": "skills/meta/maoris-ki-lego",
   "files": {
-    "SKILL.md": "50cf558caf12f6853c2a29d8382cacb3357d6d9d8007bd71df29f7ce4fb40ed3",
+    "SKILL.md": "bd5a911c6046f18ffc5d28fdbd57ae87cf49b31ed26dadbe1ad17659b5bf4842",
     "references/assembly.md": "d2f92bda79cf95a16ecf9719fd827b7ec1d60a69273154c2c466c1ced3365655",
     "references/discovery.md": "908cf8e66c3cfdd0108d311a150e22cc725fb6260f3722983ae705f72e399c48",
     "references/operations.md": "ec55de7892fcb86eadad29eaa3b193444657e21d78ff0b857c8bcb5851d6342a",
