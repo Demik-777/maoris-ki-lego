@@ -24,6 +24,22 @@ Contract review skill with CUAD risk detection, market benchmarks, lawyer-ready 
 - Default focus: US law — provisions vary by jurisdiction, verify for DE/EU contracts
 - Source: https://github.com/evolsb/claude-legal-skill
 
+## GoogleChrome/modern-web-guidance
+Official web-platform guidance for coding agents (Chrome, Edge, Firefox and MDN teams): ~210 short guides on modern HTML, CSS and client-side JS, with browser-compatibility data. Not copied here — the CLI fetches the current guide on demand.
+- License: Apache-2.0. Requires Node.js ≥ 22 for the CLI.
+- Use without installing (preferred, nothing is stored locally):
+  - `npx -y modern-web-guidance@latest search "<2–5 word UI/platform capability>"` → JSON list of `{id, description}`
+  - `npx -y modern-web-guidance@latest retrieve "<id>[,<id>]"` → full guide; large output is saved to a temp file — read that file in full
+- Install as a skill (only on explicit request): `npx modern-web-guidance@latest install` (wizard), or Claude Code `/plugin marketplace add GoogleChrome/modern-web-guidance` then `/plugin install modern-web-guidance@googlechrome`
+- Checked 2026-11-13: not present in this repo or in installed plugins; `search "light dismiss dialog"` returned 10 relevant guides, `retrieve "animate-to-from-top-layer"` returned the full guide (Node 22, via npx).
+- Routing — use for:
+  - writing or changing HTML, CSS or client-side JavaScript;
+  - web apps, landing pages, UI components (dialogs, forms, menus, tables), responsive/adaptive layout, dark mode;
+  - web performance (Core Web Vitals: LCP, INP, CLS; image and loading optimisation) and accessibility (keyboard, screen readers, focus).
+- Routing — do NOT use for: n8n workflows and other automations, accounting/bookkeeping/invoices, ordinary text tasks (letters, ads, translations, summaries), backend/SQL, CI/CD, Docker, Python scripts, build-tool config. Website builders without code access (Wix, Lovable, Hostinger editor) — only when we write the HTML/CSS/JS ourselves.
+- Relation to other tools: complements, not replaces, `frontend-design` (visual design) and SEO skills. `legacy-scan` only for an explicit request to modernise a whole codebase.
+- Source: https://github.com/GoogleChrome/modern-web-guidance · Docs: https://developer.chrome.com/docs/modern-web-guidance
+
 ## ✅ skills/business/ refreshed (08.08.2026)
 Re-synced from alirezarezvani/claude-skills: business-growth (44), c-level (287, incl. founder-mode personas + general-counsel-advisor), finance (27), pm/project-management (74) — 432 files total, up from the original ~386. Source repo continues to grow beyond these 4 categories (engineering, marketing, product, compliance, research-ops) — those are out of scope for `skills/business/`, not pulled in.
 
