@@ -1,10 +1,10 @@
 {
-  "release": "2.2.1",
-  "released_on": "2026-11-11",
+  "release": "2.2.2",
+  "released_on": "2026-11-14",
   "source_repository": "Demik-777/maoris-ki-lego",
   "source_directory": "skills/meta/maoris-ki-lego",
   "files": {
-    "SKILL.md": "bd5a911c6046f18ffc5d28fdbd57ae87cf49b31ed26dadbe1ad17659b5bf4842",
+    "SKILL.md": "89526d5475b542f00be3c24488a6d28c337aeb5ca257324c80eb0e24a54e5423",
     "references/assembly.md": "d2f92bda79cf95a16ecf9719fd827b7ec1d60a69273154c2c466c1ced3365655",
     "references/discovery.md": "908cf8e66c3cfdd0108d311a150e22cc725fb6260f3722983ae705f72e399c48",
     "references/operations.md": "ec55de7892fcb86eadad29eaa3b193444657e21d78ff0b857c8bcb5851d6342a",
@@ -13,6 +13,6 @@
     "scripts/verify_release.py": "9374e2687bb9019ab0a1bba4b28ca17fabce0af01eb49b52f7fba7f7a8f15c72",
     "scripts/route.py": "d9b01b253f859af02c4288561558fdcaee477306ddb0e78300f9b4986a1da455",
     "scripts/test_route.py": "bddb81dbcbe29f32b85af44526bd4b168c8b0043bcd956500b7ca631b038e9d8",
-    "references/interaction.md": "f2cb9e6078ced694aa88f499d6359210c140d1eeca7dda78a6ee6cc7ba9bb2b2"
+    "references/interaction.md": "71251f132ff04f4831b184c57ea7bb0d141c08a2c049bdc726837786d56a3d94"
   }
 }
